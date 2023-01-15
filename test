@@ -1,0 +1,141 @@
+local customMap = game:GetObjects("rbxassetid://12164922817")[1]
+
+local currentMap = workspace.Map
+
+
+customMap.Traps.Parent = currentMap
+customMap.Killparts.Parent = currentMap
+
+local function protectedObject(instance)
+    if
+    instance.Name == ("GSF") or
+    instance.Name == ("RSF") or
+    instance.Name == ("func_respawnroom") then
+        return true
+    end
+end
+
+local function replace(folderString)
+    if customMap:FindFirstChild(folderString) then
+        for i, v in pairs(currentMap[folderString]:GetChildren()) do
+            if not protectedObject(v) then
+                v:Destroy()
+            end
+        end
+        for i, v in pairs(customMap[folderString]:GetChildren()) do
+            v.Parent = currentMap[folderString]
+        end
+    end
+end
+
+
+local function fixIgnore()
+    for i,v in pairs (customMap.Ignore:GetChildren()) do
+        if v.Name == ("GSF") or v.Name == ("RSF") then
+            local foundObject = currentMap.Ignore[v.Name].func_respawnroom
+            local customObject = v.func_respawnroom
+            foundObject.CFrame = customObject.CFrame
+            foundObject.Size = customObject.Size
+        end
+    end
+    if currentMap.Ignore:FindFirstChild("trigger_hurt") then
+        for i,v in pairs (currentMap.Ignore.trigger_hurt:GetChildren()) do
+            v:Destroy()
+        end
+    end
+
+end
+
+replace("Clips")
+replace("Geometry")
+replace("TGCSpawns")
+replace("TRCSpawns")
+
+
+
+
+local lightingData = {
+    ["ClockTime"] = 9.366666793823242,
+    ["ColorShift_Bottom"] = Color3.fromRGB(0, 0, 0),
+    ["FogColor"] = Color3.fromRGB(191, 191, 191),
+    ["FogEnd"] = 10000000,
+    ["FogStart"] = 10000000,
+    ["EnvironmentDiffuseScale"] = 0,
+    ["EnvironmentSpecularScale"] = 0.10000000149011612,
+    ["ExposureCompensation"] = 1,
+    ["GeographicLatitude"] = 45,
+    ["Ambient"] = Color3.fromRGB(70, 61, 58),
+    ["OutdoorAmbient"] = Color3.fromRGB(0, 0, 0),
+    ["ShadowSoftness"] = 0.5,
+    ["Brightness"] = 2.5,
+    ["ColorShift_Top"] = Color3.fromRGB(216, 207, 194),
+    ["GlobalShadows"] = true
+}
+
+for i,v in pairs (game.Lighting:GetChildren()) do
+    --pcall(function()
+        v:Destroy()
+    --end)
+end
+
+
+for i,v in pairs (lightingData) do
+    game.Lighting[i] = v
+end
+
+
+
+pcall(function()
+    --sethiddenproperty(game.Lighting, "Technology", "Future") -- uncomment this to unlock extreme graphics, and 3/4 of ur framerate gone bruh
+end)
+
+
+
+
+
+
+
+
+
+function died()
+    local event = game:GetService("ReplicatedStorage").Events.KillMe
+local A_1 = "Please :)"
+
+
+event:FireServer(A_1)-- caller: game:GetService("Players").eoemqwoi23223.PlayerGui.GUI.InputMaster
+wait(2)
+end
+
+for i,v in pairs(game.Workspace.Map.Killparts:GetChildren()) do
+    v.Touched:Connect(died)
+end
+
+
+
+game.Workspace.Map.Traps.spikes.Parent = game.ReplicatedStorage
+game.Workspace.Map.Traps.trap.Parent = game.ReplicatedStorage
+
+folder = game.Players.LocalPlayer.PlayerGui.ChatGUI.Chat.RobloxSucks.Scroller.Chats
+map = game.Workspace.Map
+
+folder.ChildAdded:Connect(function(v)
+    task.wait(0.01)
+	if v.Message.Text == ("t_1") and v.PlayerName.TextColor3 == Color3.fromRGB(75, 151, 75) then
+    game.ReplicatedStorage.trap.Parent = map.Traps
+    wait(5)
+    map.Killparts.firepart.Position = Vector3.new(-10.75, 21.725, -29.7)
+    wait(5)
+    map.Killparts.firepart.Position = Vector3.new(-10.75, -25.275, -29.7)
+    map.Traps.trap.Parent = game.ReplicatedStorage
+elseif v.Message.Text == ("t_2") and v.PlayerName.TextColor3 == Color3.fromRGB(75, 151, 75) then
+    game.Workspace.Map.Traps.bridge.Parent = game.ReplicatedStorage
+    wait(3)
+     game.ReplicatedStorage.bridge.Parent = game.Workspace.Map.Traps
+elseif v.Message.Text == ("t_3") and v.PlayerName.TextColor3 == Color3.fromRGB(75, 151, 75) then
+    map.Killparts.spikehitbox.Position = Vector3.new(120.6, 3.2, 5.45)
+    game.ReplicatedStorage.spikes.Parent = map.Traps
+    wait(4)
+    map.Killparts.spikehitbox.Position = Vector3.new(120.6, -3.3, 5.45)
+    map.Traps.spikes.Parent = game.ReplicatedStorage
+end
+end)
