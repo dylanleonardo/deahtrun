@@ -120,18 +120,18 @@ map = game.Workspace.Map
 
 folder.ChildAdded:Connect(function(v)
     task.wait(0.01)
-	if v.Message.Text == ("t_1") and v.PlayerName.TextColor3 == Color3.fromRGB(75, 151, 75) then
+	if v.Message.Text == ("t_ft") and v.PlayerName.TextColor3 == Color3.fromRGB(75, 151, 75) then
     game.ReplicatedStorage.trap.Parent = map.Traps
     wait(5)
     map.Killparts.firepart.Position = Vector3.new(-10.75, 21.725, -29.7)
     wait(5)
     map.Killparts.firepart.Position = Vector3.new(-10.75, -25.275, -29.7)
     map.Traps.trap.Parent = game.ReplicatedStorage
-elseif v.Message.Text == ("t_2") and v.PlayerName.TextColor3 == Color3.fromRGB(75, 151, 75) then
+elseif v.Message.Text == ("t_st") and v.PlayerName.TextColor3 == Color3.fromRGB(75, 151, 75) then
     game.Workspace.Map.Traps.bridge.Parent = game.ReplicatedStorage
     wait(3)
      game.ReplicatedStorage.bridge.Parent = game.Workspace.Map.Traps
-elseif v.Message.Text == ("t_3") and v.PlayerName.TextColor3 == Color3.fromRGB(75, 151, 75) then
+elseif v.Message.Text == ("t_tt") and v.PlayerName.TextColor3 == Color3.fromRGB(75, 151, 75) then
     map.Killparts.spikehitbox.Position = Vector3.new(120.6, 3.2, 5.45)
     game.ReplicatedStorage.spikes.Parent = map.Traps
     wait(4)
